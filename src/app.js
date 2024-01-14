@@ -5,8 +5,11 @@ import cookieParser from 'cookie-parser'
 import routerMenu from './routes/detalleMenu.routes.js'
 import Routerpedido from './routes/pedidos.routes.js'
 import routerUserAdmin from './routes/usuarioadmin.routes.js'
+import cors from 'cors'
 const app = express()
 
+
+app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
