@@ -1,12 +1,19 @@
 import Usuario from "../models/user.model.js"
 import bcrypt from 'bcryptjs'
 import {createAccessToken} from '../libs/jwt.js'
-
+import  jwt  from "jsonwebtoken"
+import { TOKEN_SECRET } from "../config.js"
 
 export const register = async (req,res) => {
         const {username,email,password} = req.body
-
         try {
+                const userFound = await  Usuario.findOne({username})
+                if (userFound) 
+                return  res.status(400).json(["the username already exists"])
+                const emailFound = await  Usuario.findOne({email})
+                        if (emailFound) 
+                        return  res.status(400).json(["the email already exists"])
+
 
                 const passwordHash = await bcrypt.hash(password,10)
 
@@ -36,7 +43,7 @@ export const register = async (req,res) => {
 
 
         } catch (error) {
-                res.status(500).json({message: error.message})
+                res.status(500).json(error.message)
         }
 
        
@@ -44,17 +51,18 @@ export const register = async (req,res) => {
 
 export const login = async (req,res) => {
         const {email,password} = req.body
+        
 
         try {
 
                 const userFound = await Usuario.findOne({email})
               
-                if(!userFound) return res.status(400).json({message:"invalid login"})                
+                if(!userFound) return res.status(400).json(["invalid login"])                
 
 
                 const isMatch = await bcrypt.compare(password,userFound.password)
 
-                if(!isMatch) return res.status(400).json({message:"invalid login"})
+                if(!isMatch) return res.status(400).json(["invalid login"])
                    
 
                 const token = await createAccessToken({id: userFound._id})
@@ -95,3 +103,19 @@ export const profile = async (req,res) => {
         })
 
 }
+
+export const verifyToken = async (req,res) => {
+
+        const {token} =  req.cookies
+
+        if(!token) return res.status(401).json(["Unauthorized"])
+
+        jwt.verify(token,TOKEN_SECRET,async  (err,user)=>{
+                if (err) return res.status(401).json(["Unauthorized"])
+
+                const userFound = await Usuario.findById(user.id)
+                if(!userFound) return res.status(401).json(["Unauthorized"])
+        })
+
+}
+
