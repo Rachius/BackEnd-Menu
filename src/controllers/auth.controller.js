@@ -55,6 +55,10 @@ export const login = async (req,res) => {
 
         try {
 
+                const userActive = await Usuario.findOne({ email, estado: true});
+                if (!userActive) return res.status(400).json(["Usuario no activo"]);
+              
+
                 const userFound = await Usuario.findOne({email})
               
                 if(!userFound) return res.status(400).json(["invalid login"])                
@@ -71,6 +75,7 @@ export const login = async (req,res) => {
                         id: userFound._id,
                         username : userFound.username,
                         email : userFound.email,
+                        rol: userFound.rol,
 
                })
 
