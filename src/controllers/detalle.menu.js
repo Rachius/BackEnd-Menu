@@ -13,7 +13,7 @@ Menu.crearMenu = async (req,res)=>{
         })
         await nuevoMenu.save()
         res.status(201).json({
-            mensaje:"Plan registrado"
+            mensaje:"Menu registrado"
            })
     }catch(error){
         console.log(error)

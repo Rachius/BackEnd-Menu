@@ -120,7 +120,19 @@ export const verifyToken = async (req,res) => {
 
                 const userFound = await Usuario.findById(user.id)
                 if(!userFound) return res.status(401).json(["Unauthorized"])
+
+                return res.json({
+                        
+
+                       rol: userFound.rol,
+                       
+
+                
+                })   
+               
         })
+
+       
 
 }
 
