@@ -15,9 +15,9 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use("/api",authRoutes)
-app.use("/admMenu", routerMenu )
-app.use("/admPedidos",Routerpedido)
-app.use("/admUser",routerUserAdmin)
+app.use("/api/admMenu", routerMenu )
+app.use("/api/admPedidos",Routerpedido)
+app.use("/api/admUser",routerUserAdmin)
 
 
 export default app
