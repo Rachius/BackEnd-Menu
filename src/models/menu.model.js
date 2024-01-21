@@ -6,23 +6,28 @@ const detalleMenuSchema = new Schema({
         require : true
 
     },
-    imagenMenu:{
-        type: String,
-        require: false
-    },
-    precioMenu:{
-        type: Number,
-        require: true
-    },
+
+ 
     descripcionMenu:{
         type: String,
         require:true
 
     },
+    categoriaMenu:{
+        type: String,
+        require:true
+
+    },
+    precioMenu:{
+        type: Number,
+        require: true
+    },
     estado:{
         type: Boolean,
         require:false
     }
+},{
+    timestamps : true
 })
 
 const detalleMenuModel = mongoose.model("Menu",detalleMenuSchema)
