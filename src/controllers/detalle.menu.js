@@ -3,21 +3,28 @@ import detalleMenuModel from "../models/menu.model.js";
 const Menu = {}
 
 Menu.crearMenu = async (req,res)=>{
+    const {tituloMenu,descripcionMenu,categoriaMenu,precioMenu} = req.body
     try{
         const nuevoMenu = new detalleMenuModel({
-            tituloMenu:req.body.tituloMenu,
-            imagenMenu:req.body.imagenMenu,
-            precioMenu:req.body.precioMenu,
-            descripcionMenu:req.body.descripcionMenu,
-            estado:req.body.estado
-        })
-        await nuevoMenu.save()
-        res.status(201).json({
-            mensaje:"Menu registrado"
-           })
+            tituloMenu,
+            descripcionMenu,
+            categoriaMenu,
+            precioMenu,
+            estado: true
+
+    })
+    const menuSaved = await nuevoMenu.save()
+
+    res.json({
+        message: "Menu registrado"
+
+   })
+   
+          
     }catch(error){
-        console.log(error)
-        res.status(404)
+        res.status(404).json(error.message)
+        console.log(error.message)
+       
     }
 }
 
