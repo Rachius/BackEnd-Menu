@@ -4,6 +4,7 @@ import {createAccessToken} from '../libs/jwt.js'
 import  jwt  from "jsonwebtoken"
 import { TOKEN_SECRET } from "../config.js"
 
+
 export const register = async (req,res) => {
         const {username,email,password} = req.body
         try {

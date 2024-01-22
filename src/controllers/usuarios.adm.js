@@ -1,4 +1,50 @@
 import userModel from "../models/user.model.js"
+import Usuario from "../models/user.model.js"
+import bcrypt from 'bcryptjs'
+
+
+
+
+export const admRegister = async (req,res) => {
+    const {username,email,password} = req.body
+    try {
+            const userFound = await  Usuario.findOne({username})
+            if (userFound) 
+            return  res.status(400).json(["the username already exists"])
+            const emailFound = await  Usuario.findOne({email})
+                    if (emailFound) 
+                    return  res.status(400).json(["the email already exists"])
+
+
+            const passwordHash = await bcrypt.hash(password,10)
+
+            const newUser = new Usuario({
+                    username,
+                    email,
+                    password: passwordHash,
+                    estado: true,
+                    rol: "user"
+
+            })
+            
+            
+    
+    
+    
+            const userSaved = await newUser.save()
+
+            res.json(["Usuario creado con exito"])
+
+
+
+
+    } catch (error) {
+            res.status(500).json(error.message)
+    }
+
+   
+       
+}
 
 const usuarioAdm = {}
 
@@ -52,5 +98,7 @@ usuarioAdm.listaUsuario= async(req,res)=>{
         res.status(404)
     }
 }
+
+
 
 export default usuarioAdm
