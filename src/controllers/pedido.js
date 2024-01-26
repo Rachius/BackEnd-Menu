@@ -3,6 +3,24 @@ import pedidoModel  from "../models/pedido.model.js";
 const pedido = {}
 
 
+pedido.crearPedido = async (req,res)=>{
+    try{
+        const nuevoPedido = new pedidoModel({
+            idmenu:req.body.idmenu,
+            cantidad:req.body.cantidad,
+            subtotal:req.body.subtotal
+
+        })
+        await nuevoPedido.save()
+        res.status(201).json({
+            mensaje:"Agregado al carrito"
+           })
+    }catch(error){
+        console.log(error)
+        res.status(404)
+    }
+}
+
 
 pedido.editarPedido = async(req,res)=>{
     try {
