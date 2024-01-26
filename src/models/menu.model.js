@@ -1,13 +1,17 @@
 import mongoose, { Mongoose, Schema } from "mongoose";
 
+
+
+
+
+
+
 const detalleMenuSchema = new Schema({
     tituloMenu:{
         type: String,
         require : true
 
-    },
-
- 
+    }, 
     descripcionMenu:{
         type: String,
         require:true
