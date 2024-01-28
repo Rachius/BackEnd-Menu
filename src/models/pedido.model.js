@@ -1,42 +1,50 @@
 import mongoose, { Schema } from "mongoose";
+import { string } from "zod";
 
 const pedidoSchema = new Schema({
-    items: [
-        {
-            idmenu: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Menu',
-                required: true
-            },
-            cantidad: {
-                type: Number,
-                required: true
-            },
-            subtotal: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
+    id: {
+      type: String,
+      required: false,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
     total: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
-    usuario: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    },
+    items: [
+      {
+        idmenu: {
+          type: String,
+          required: true,
+        },
+        tituloMenu: {
+          type: String,
+          required: true,
+        },
+        precioMenu: {
+          type: Number,
+          required: true,
+        },
+        cantidad: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
     estado: {
-        type: String,
-        enum: ['pendiente', 'realizado'],
-        default: 'pendiente'
+      type: String,
+      enum: ['pendiente', 'realizado'],
+      default: 'pendiente',
     },
     fechaPedido: {
-        type: Date,
-        default: Date.now
-    }
-});
+      type: Date,
+      default: Date.now,
+    },
+  });
+  
 
 const pedidoModel = mongoose.model("Pedido", pedidoSchema);
 
