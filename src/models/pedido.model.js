@@ -18,7 +18,7 @@ const pedidoSchema = new Schema({
       {
         idmenu: {
           type: String,
-          required: true,
+          required: false,
         },
         tituloMenu: {
           type: String,
