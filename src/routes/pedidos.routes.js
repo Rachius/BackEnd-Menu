@@ -6,9 +6,10 @@ const Routerpedido = Router()
 
 
 Routerpedido.post('/pedido',pedido.crearPedido)
+Routerpedido.get('/listarPedido', pedido.listarPedido);
+
 Routerpedido.route("/:_id")
 .put(pedido.editarPedido)
 .get(pedido.verPedido)
-Routerpedido.get('/listarPedido', pedido.listarPedido);
 
 export default Routerpedido

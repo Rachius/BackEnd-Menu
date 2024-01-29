@@ -46,7 +46,7 @@ pedido.verPedido= async(req,res)=>{
 
 pedido.listarPedido= async(req,res)=>{
     try {
-        const verListaPedido= await pedidoModel.find()
+        const verListaPedido = await pedidoModel.find()
         res.status(200).json(verListaPedido)
     } catch (error) {
         console.log(error)
