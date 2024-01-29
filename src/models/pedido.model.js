@@ -8,7 +8,7 @@ const pedidoSchema = new Schema({
     },
     username: {
       type: String,
-      required: true,
+      required: false,
     },
     total: {
       type: Number,
