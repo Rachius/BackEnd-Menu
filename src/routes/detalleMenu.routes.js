@@ -1,6 +1,5 @@
 import { Router } from "express";
 import Menu from "../controllers/detalle.menu.js";
-import { autRequired } from "../middlewares/validateToken.js";
 
 const routerMenu = Router()
 

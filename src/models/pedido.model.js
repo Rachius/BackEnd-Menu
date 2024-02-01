@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { string } from "zod";
 
 const pedidoSchema = new Schema({
     id: {
